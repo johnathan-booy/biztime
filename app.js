@@ -8,6 +8,8 @@ app.use(express.json());
 
 const companiesRoutes = require("./routes/companies");
 app.use("/companies", companiesRoutes);
+const invoicesRoutes = require("./routes/invoices");
+app.use("/invoices", invoicesRoutes);
 
 /** 404 handler */
 
