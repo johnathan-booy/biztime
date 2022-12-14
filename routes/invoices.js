@@ -16,14 +16,6 @@ function validateAmt(req, res, next) {
 	return next();
 }
 
-// function validateAmt(req, res, next) {
-// 	const { name, description } = req.body;
-// 	if (!name) throw new ExpressError("Body of request is missing name", 400);
-// 	if (!description)
-// 		throw new ExpressError("Body of request is missing description", 400);
-// 	return next();
-// }
-
 router.get("/", async (req, res, next) => {
 	try {
 		const results = await db.query("SELECT * FROM invoices;");
@@ -64,7 +56,7 @@ router.patch("/:id", validateAmt, async (req, res, next) => {
 		const { id } = req.params;
 		const { amt } = req.body;
 		const results = await db.query(
-			"UPDATE invoices SET amt=$1 WHERE id=$2 RETURNING *",
+			"UPDATE invoices SET amt=$1 WHERE id=$2 RETURNING id, comp_code, amt, paid, add_date, paid_date`",
 			[amt, id]
 		);
 		if (results.rows.length === 0)
